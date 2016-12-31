@@ -15,10 +15,10 @@ int main() {
 
     printf("\n----------");
     printf("Removing value(s)");
-    removeByValue(&l, -1);
-    removeByValue(&l, 0);
-    removeByValue(&l, 4);
-    removeByValue(&l, 9);
+    removeByValue(l, -1);
+    removeByValue(l, 0);
+    removeByValue(l, 4);
+    removeByValue(l, 9);
     printf("----------\n");
 
     displayList(l);

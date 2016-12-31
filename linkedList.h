@@ -17,7 +17,7 @@ list *emptyList();
 
 void add(list *l, int value);
 
-void removeByValue(list **l, int value);
+void removeByValue(list *l, int value);
 
 void displayList(list *l);
 

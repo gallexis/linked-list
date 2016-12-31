@@ -30,14 +30,14 @@ void add(list *l, int value) {
     setList(elt, value);
 }
 
-void removeByValue(list **l, int value) {
-    if (NULL == *l) return;
-    list *elt = *l;
+void removeByValue(list *l, int value) {
+    if (NULL == l) return;
+    list *elt = l;
 
     for(; elt->is_set; elt= elt->next)
     {
         if(elt->value == value){
-            *elt = *elt->next;
+            *elt = *(elt->next);
             return;
         }
     }
