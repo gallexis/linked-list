@@ -1,24 +1,32 @@
+//
+// Created by Alexis Gallèpe on 03/01/2017.
+//
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedList.h"
+#include <string.h>
+#include "genLinkedList.h"
 
 list *emptyList() {
     list *l = malloc(sizeof(list));
 
     l->is_set = false;
-    l->value = (int) NULL;
+    l->value = NULL;
     l->next = NULL;
 
     return l;
 }
 
-void setList(list *l, int value) {
+void setList(list *l, void *value) {
     l->is_set = true;
-    l->value = value;
+    l->value = malloc(sizeof(value));
     l->next = emptyList();
+
+    memcpy(l->value, value, sizeof(value));
+
 }
 
-void add(list *l, int value) {
+void add(list *l, void *value) {
     if (NULL == l) return;
     list *elt = l;
 
@@ -29,24 +37,14 @@ void add(list *l, int value) {
     setList(elt, value);
 }
 
-void removeByValue(list *l, int value) {
+void removeByValue(list *l, void *value) {
     if (NULL == l) return;
     list *elt = l;
 
-    for(; elt->is_set; elt= elt->next)
-    {
-        if(elt->value == value){
+    for (; elt->is_set; elt = elt->next) {
+        if (memcmp(elt->value, value, sizeof(value))) {
             *elt = *(elt->next);
             return;
         }
     }
-}
-
-void displayList(list *l) {
-    list *elt = l;
-    while (elt->is_set) {
-        printf("\nValue: %d, is_set: %d", elt->value, elt->is_set);
-        elt = elt->next;
-    }
-    printf("\n");
 }

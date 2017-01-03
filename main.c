@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include"linkedList.h"
+#include"genLinkedList.h"
 
+/*
 int main() {
     list *l;
     l = emptyList();
@@ -25,3 +26,25 @@ int main() {
 
     return 0;
 }
+*/
+
+void printInt(void *v) {
+    printf("::: %d", *(int *) v);
+}
+
+int main() {
+    list *l;
+    l = emptyList();
+    int j = 0;
+    for (int i = 0; i < 10; ++i) {
+        add(l, &i);
+    }
+
+    removeByValue(l, &j);
+
+    printInt(l->value);
+    printInt(l->next->value);
+
+    return 0;
+}
+
