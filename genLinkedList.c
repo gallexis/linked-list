@@ -7,6 +7,11 @@
 #include <string.h>
 #include "genLinkedList.h"
 
+void printInt(void *v) {
+    printf("\nValue: %d", *((int *) v));
+}
+
+
 list *emptyList() {
     list *l = malloc(sizeof(list));
 
@@ -42,9 +47,18 @@ void removeByValue(list *l, void *value) {
     list *elt = l;
 
     for (; elt->is_set; elt = elt->next) {
-        if (memcmp(elt->value, value, sizeof(value))) {
+        if ((*((char *) elt->value) == *((char *) value)) != 0) {
             *elt = *(elt->next);
             return;
         }
     }
+}
+
+void displayList(list *l) {
+    list *elt = l;
+    while (elt->is_set) {
+        printInt(elt->value);
+        elt = elt->next;
+    }
+    printf("\n");
 }

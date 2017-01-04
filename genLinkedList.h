@@ -21,7 +21,7 @@ void add(list *l, void *value);
 
 void removeByValue(list *l, void *value);
 
-//void displayList(list *l);
+void displayList(list *l);
 
 
 
