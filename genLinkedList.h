@@ -15,13 +15,13 @@ typedef struct List {
 
 list *emptyList();
 
-void setList(list *l, void *value);
+void addHead(list *l, void *value);
 
-void add(list *l, void *value);
+void addTail(list *l, void *value);
 
 void removeByValue(list *l, void *value);
 
-void displayList(list *l);
+void displayList(list *l, void (*print)(void *));
 
 
 

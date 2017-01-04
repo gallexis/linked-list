@@ -7,11 +7,6 @@
 #include <string.h>
 #include "genLinkedList.h"
 
-void printInt(void *v) {
-    printf("\nValue: %d", *((int *) v));
-}
-
-
 list *emptyList() {
     list *l = malloc(sizeof(list));
 
@@ -22,24 +17,33 @@ list *emptyList() {
     return l;
 }
 
-void setList(list *l, void *value) {
+void addHead(list *l, void *value) {
+    if (NULL == l) return;
+    list *cpy = malloc(sizeof(list));
+    size_t size_value = sizeof(value);
+
+    memcpy(cpy, l, sizeof(list));
+
     l->is_set = true;
-    l->value = malloc(sizeof(value));
-    l->next = emptyList();
-
-    memcpy(l->value, value, sizeof(value));
-
+    l->value = malloc(size_value);
+    l->next = cpy;
+    memcpy(l->value, value, size_value);
 }
 
-void add(list *l, void *value) {
+void addTail(list *l, void *value) {
     if (NULL == l) return;
     list *elt = l;
+    size_t size_value = sizeof(value);
 
     while (elt->is_set) {
         elt = elt->next;
     }
 
-    setList(elt, value);
+    elt->is_set = true;
+    elt->value = malloc(size_value);
+    elt->next = emptyList();
+
+    memcpy(elt->value, value, size_value);
 }
 
 void removeByValue(list *l, void *value) {
@@ -54,10 +58,10 @@ void removeByValue(list *l, void *value) {
     }
 }
 
-void displayList(list *l) {
+void displayList(list *l, void (*print)(void *)) {
     list *elt = l;
     while (elt->is_set) {
-        printInt(elt->value);
+        print(elt->value);
         elt = elt->next;
     }
     printf("\n");

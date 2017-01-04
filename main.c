@@ -4,8 +4,6 @@
 
 #include"genLinkedList.h"
 
-#define fmt "%20s is '%d'\n"
-
 enum t_typename {
     TYPENAME_BOOL,
     TYPENAME_UNSIGNED_CHAR,
@@ -40,46 +38,16 @@ enum t_typename {
         void *: TYPENAME_POINTER_TO_VOID,    int *: TYPENAME_POINTER_TO_INT,          \
     default: TYPENAME_OTHER)
 
-
-void types_test() {
-    size_t s;
-    intmax_t i;
-    int ai[3] = {0};
-    int tt = 7;
-    bool bb = true;
-    char cc = 'c';
-
-    switch (typename(ai)) {
-        case TYPENAME_BOOL :
-            printf("TYPENAME_BOOL!\n");
-            break;
-        case TYPENAME_CHAR:
-            printf("TYPENAME_CHAR!\n");
-            break;
-        case TYPENAME_POINTER_TO_INT :
-            printf("TYPENAME_POINTER_TO_INT!\n");
-            break;
-        case TYPENAME_INT :
-            printf("TYPENAME_INT!\n");
-            break;
-        default :
-            printf("TYPENAME_OTHER \n");
-    }
-
-
-    printf(fmt fmt fmt fmt fmt fmt fmt fmt fmt fmt,
-           "bool", typename(bb), "int", typename(tt),
-           "size_t", typename(s), "char", typename(cc),
-           "intmax_t", typename(i), "character constant", typename('0'),
-           "0x7FFFFFFF", typename(0x7FFFFFFF), "0xFFFFFFFF", typename(0xFFFFFFFF),
-           "0x7FFFFFFFU", typename(0x7FFFFFFFU), "array of int", typename(ai));
+void printInt(void *v) {
+    printf("\nValue: %d", *((int *) v));
 }
 
-
+void printFloat(void *v) {
+    printf("\nValue: %f", *((float *) v));
+}
 
 int main() {
-    types_test();
-    return 0;
+
     int a, b, c;
     a = 0;
     b = 4;
@@ -89,13 +57,11 @@ int main() {
     l = emptyList();
 
     for (int i = 0; i < 10; ++i) {
-        add(l, &i);
+        addTail(l, &i);
     }
 
-    displayList(l);
-
-    printf("\n----------");
-    printf("Removing value(s)");
+    printf("Inserted in list from 0 to 9.\n----------");
+    printf("Removing values 0,4,9:: %d", l->is_set);
 
     removeByValue(l, &a);
     removeByValue(l, &b);
@@ -103,7 +69,29 @@ int main() {
 
     printf("----------\n");
 
-    displayList(l);
+    displayList(l, printInt);
+
+    /*
+    switch(typename(l->value)) {
+        case TYPENAME_BOOL :
+            printf("TYPENAME_BOOL!\n" );
+            break;
+        case TYPENAME_CHAR:
+            printf("TYPENAME_CHAR!\n" );
+            break;
+        case TYPENAME_POINTER_TO_INT :
+            printf("TYPENAME_POINTER_TO_INT!\n" );
+            break;
+        case TYPENAME_INT :
+            printf("TYPENAME_INT!\n" );
+            break;
+        case TYPENAME_POINTER_TO_VOID :
+            printf("TYPENAME_POINTER_TO_VOID!\n" );
+            break;
+        default :
+            printf("TYPENAME_OTHER \n" );
+    }
+    */
 
     return 0;
 }
