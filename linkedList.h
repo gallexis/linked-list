@@ -1,25 +1,34 @@
 //
-// Created by Alexis Gallèpe on 10/12/2016.
+// Created by Alexis Gallèpe on 03/01/2017.
 //
 
-#ifndef LINKED_LISTS_LINKEDLIST_H
-#define LINKED_LISTS_LINKEDLIST_H
+#ifndef LINKED_LISTS_GENLINKEDLIST_H
+#define LINKED_LISTS_GENLINKEDLIST_H
 
 #include <stdbool.h>
 
-typedef struct List {
+typedef struct _List {
     bool is_set;
-    int value;
-    struct List *next;
-} list;
+    void *value;
+    struct _List *next;
+} List;
 
-list *emptyList();
+List *emptyList();
 
-void add(list *l, int value);
+void addHead(List *l, void *value);
 
-void removeByValue(list *l, int value);
+void addTail(List *l, void *value);
 
-void displayList(list *l);
+void removeByValue(List *l, void *value);
+
+void displayList(List *l, void (*print)(void *));
 
 
-#endif //LINKED_LISTS_LINKEDLIST_H
+
+
+
+
+
+
+
+#endif //LINKED_LISTS_GENLINKEDLIST_H
